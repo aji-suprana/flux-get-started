@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: vobis-web-dev
+  namespace: cert-manager
+spec:
+  secretName: vobis-web-dev
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  organization:
+    - PT. Mahkota Giri Suprana
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  dnsNames:
+    - "v2-dev.vobis.io"

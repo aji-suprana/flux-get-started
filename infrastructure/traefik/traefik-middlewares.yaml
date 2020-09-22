@@ -1,0 +1,36 @@
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: replace-base-path
+  namespace: vobis-dev
+spec:
+  # removes the first element of the path
+  # e.g. /product-service/swagger -> /swagger
+  replacePathRegex:
+    #regex: ^/auth/(.*)
+    regex: ^/[^\\/]+/(.*)
+    replacement: /$1
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirect
+  namespace: traefik
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+kind: Middleware
+apiVersion: traefik.containo.us/v1alpha1
+metadata:
+  name: https-only
+  namespace: default
+spec:
+  redirectRegex:
+    regex: ^http://(.*)
+    replacement: https://${1}
+#  redirectScheme:
+#    scheme: https
+#    permanent: true
