@@ -1,3 +1,0 @@
-serviceAccount:
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::734320562459:role/vbs-cert-manager
